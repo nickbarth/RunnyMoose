@@ -6,14 +6,15 @@ import flixel.FlxState;
 import flixel.addons.display.FlxBackdrop;
 import flixel.effects.particles.FlxEmitterExt;
 import flixel.text.FlxText;
+import flixel.tweens.FlxEase.EaseFunction;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween.TweenOptions;
+import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
 import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxMath;
 import flixel.util.FlxPoint;
 import flixel.util.FlxRect;
-import motion.Actuate;
-import motion.MotionPath;
-import motion.easing.Linear;
 
 using flixel.util.FlxSpriteUtil;
 
@@ -41,8 +42,6 @@ class MenuState extends FlxState
    */
   override public function create():Void
   {
-    var path = new MotionPath().bezier(0, 100, 0, 0);
-
     _background = new FlxBackdrop("assets/images/grass.png");
     _background.velocity.set(-100, 0);
     add(_background);
@@ -52,18 +51,22 @@ class MenuState extends FlxState
     add(_title);
 
     _moose = new FlxSprite();
+    _moose.x = 200;
+    _moose.y = 0;
     _moose.loadGraphic("assets/images/moose_run.png", true, 60, 64);
     _moose.animation.add("run", [0, 1], 5, true);
-    _moose.animation.play("run");
-    Actuate.motionPath(_moose, 1, { x: path.x, y: path.y }).repeat().reflect().ease(Linear.easeNone);
+    var tween1 = FlxTween.tween(_moose, { x:200, y:200 }, 0.5, { type:FlxTween.PINGPONG });
     add(_moose);
+    _moose.animation.play("run");
 
-    // Add leaf emitter
-    _leafTrail = new FlxEmitterExt(200,200);
+    _leafTrail = new FlxEmitterExt();
+    _leafTrail.x = 202;
+    _leafTrail.y = 52;
     _leafTrail.setRotation(0, 0);
     _leafTrail.makeParticles("assets/images/leaf.png", 1200, 0, true, 0);
     _leafTrail.setAlpha(1, 1, 0, 0);
     _leafTrail.setMotion(170, 100, 0.2, 20, 200, 0.3);
+    var tween2 = FlxTween.tween(_leafTrail, { x:202, y:252 }, 0.5, { type:FlxTween.PINGPONG });
     add(_leafTrail);
     _leafTrail.start(false, 1, 0.01);
 
