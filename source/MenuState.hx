@@ -77,6 +77,13 @@ class MenuState extends FlxState
     _btnPlay.y = 300;
     add(_btnPlay);
 
+    var _link = new FlxText(0, 0, 460, "RUNNYMOOSE.COM");
+    _link.size = 40;
+    _link.y = FlxG.height - 100;
+    _link.x = FlxG.width / 2 - 220;
+    var tween4 = FlxTween.angle(_link, -5, 5, 0.2, { type:FlxTween.PINGPONG });
+    add(_link);
+
     super.create();
   }
 
