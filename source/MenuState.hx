@@ -49,6 +49,8 @@ class MenuState extends FlxState
     _title = new FlxSprite();
     _title.loadGraphic("assets/images/title.png", true, 820, 101);
     _title.x = FlxG.width / 2 - _title.width / 2;
+    var tween3 = FlxTween.tween(_title.scale, { x: 1.1 }, 0.2, { type:FlxTween.PINGPONG });
+    var tween3 = FlxTween.tween(_title.scale, { y: 0.7 }, 0.4, { type:FlxTween.PINGPONG });
     add(_title);
 
     _moose = new FlxSprite(200, 100);
