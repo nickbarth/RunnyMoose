@@ -3,9 +3,18 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.addons.display.FlxBackdrop;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
+import flixel.util.FlxDestroyUtil;
 import flixel.util.FlxMath;
+import flixel.util.FlxPoint;
+import flixel.util.FlxRect;
+import motion.Actuate;
+import motion.MotionPath;
+import motion.easing.Linear;
+
+using flixel.util.FlxSpriteUtil;
 
 /**
  * A FlxState which can be used for the game's menu.
