@@ -21,6 +21,11 @@ using flixel.util.FlxSpriteUtil;
  */
 class MenuState extends FlxState
 {
+  private var _btnPlay:FlxButton;
+  private var _background:FlxBackdrop;
+  private var _title:FlxSprite;
+  private var _moose:FlxSprite;
+
   /**
    * Function called by the Play button to start the game.
    */
