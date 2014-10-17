@@ -21,6 +21,7 @@ class Animal extends FlxSprite
     loadGraphic("assets/images/forest_animals.png", true, 23, 9);
     y = FlxRandom.intRanged(0, FlxG.height);
     x = FlxRandom.intRanged(100, FlxG.width);
+    animation.frameIndex = FlxRandom.intRanged(0, 8);
   }
 
   private function movement():Void
