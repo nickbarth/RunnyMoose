@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.system.FlxSound;
+import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxAngle;
 import flixel.util.FlxColor;
@@ -13,6 +14,7 @@ using flixel.util.FlxSpriteUtil;
 
 class Player extends FlxSprite
 {
+
   public function new(X:Float=0, Y:Float=0)
   {
     super(X, Y);
@@ -26,7 +28,6 @@ class Player extends FlxSprite
 
   private function movement():Void
   {
-    x += 5;
   }
 
   override public function update():Void
