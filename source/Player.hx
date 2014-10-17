@@ -28,6 +28,11 @@ class Player extends FlxSprite
 
   private function movement():Void
   {
+    if (FlxG.mouse.y < (FlxG.height / 2)) {
+      y -= 5;
+    } else {
+      y += 5;
+    }
   }
 
   override public function update():Void
