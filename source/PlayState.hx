@@ -17,12 +17,16 @@ class PlayState extends FlxState
   private var _background:FlxBackdrop;
   private var _player:Player;
   private var _grpTrees:FlxTypedGroup<Tree>;
+  private var _grpAnimals:FlxTypedGroup<Animal>;
+  private var _grpEnemies:FlxTypedGroup<Enemy>;
 
   /**
    * Function that is called up when to state is created to set it up.
    */
   override public function create():Void
   {
+    var n:Int;
+
     _background = new FlxBackdrop("assets/images/grass.png");
     _background.velocity.set(-100, 0);
     add(_background);
@@ -32,11 +36,20 @@ class PlayState extends FlxState
 
     _grpTrees = new FlxTypedGroup<Tree>();
     add(_grpTrees);
-
-    var n:Int;
-    for (n in 0...10)
-    {
+    for (n in 0...10) {
       _grpTrees.add(new Tree());
+    }
+
+    _grpAnimals = new FlxTypedGroup<Animal>();
+    add(_grpAnimals);
+    for (n in 0...10) {
+      _grpAnimals.add(new Animal());
+    }
+
+    _grpEnemies = new FlxTypedGroup<Enemy>();
+    add(_grpEnemies);
+    for (n in 0...5) {
+      _grpEnemies.add(new Enemy());
     }
 
     super.create();
