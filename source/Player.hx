@@ -33,6 +33,12 @@ class Player extends FlxSprite
     } else {
       y += 5;
     }
+
+    if (y < 0) {
+      y = FlxG.height - 5;
+    } else if (y > FlxG.height) {
+      y = 5;
+    }
   }
 
   override public function update():Void
