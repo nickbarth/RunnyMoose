@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.addons.display.FlxBackdrop;
+import flixel.group.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
@@ -15,6 +16,7 @@ class PlayState extends FlxState
 {
   private var _background:FlxBackdrop;
   private var _player:Player;
+  private var _grpTrees:FlxTypedGroup<Tree>;
 
   /**
    * Function that is called up when to state is created to set it up.
@@ -27,6 +29,11 @@ class PlayState extends FlxState
 
     _player = new Player();
     add(_player);
+
+    _grpTrees = new FlxTypedGroup<Tree>();
+    add(_grpTrees);
+
+    _grpTrees.add(new Tree());
 
     super.create();
   }
