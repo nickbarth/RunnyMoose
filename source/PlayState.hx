@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.addons.display.FlxBackdrop;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
@@ -12,6 +13,7 @@ import flixel.util.FlxMath;
  */
 class PlayState extends FlxState
 {
+  private var _background:FlxBackdrop;
   private var _player:Player;
 
   /**
@@ -19,6 +21,10 @@ class PlayState extends FlxState
    */
   override public function create():Void
   {
+    _background = new FlxBackdrop("assets/images/grass.png");
+    _background.velocity.set(-100, 0);
+    add(_background);
+
     _player = new Player();
     add(_player);
 
