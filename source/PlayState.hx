@@ -33,7 +33,11 @@ class PlayState extends FlxState
     _grpTrees = new FlxTypedGroup<Tree>();
     add(_grpTrees);
 
-    _grpTrees.add(new Tree());
+    var n:Int;
+    for (n in 0...10)
+    {
+      _grpTrees.add(new Tree());
+    }
 
     super.create();
   }
