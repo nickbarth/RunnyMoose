@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.addons.display.FlxBackdrop;
+import flixel.effects.particles.FlxEmitterExt;
 import flixel.group.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
@@ -19,6 +20,7 @@ class PlayState extends FlxState
   private var _grpTrees:FlxTypedGroup<Tree>;
   private var _grpAnimals:FlxTypedGroup<Animal>;
   private var _grpEnemies:FlxTypedGroup<Enemy>;
+  private var _leafTrail:FlxEmitterExt;
 
   /**
    * Function that is called up when to state is created to set it up.
@@ -33,6 +35,14 @@ class PlayState extends FlxState
 
     _player = new Player();
     add(_player);
+
+    _leafTrail = new FlxEmitterExt(200, 153);
+    _leafTrail.setRotation(0, 0);
+    _leafTrail.makeParticles("assets/images/leaf.png", 1200, 0, true, 0);
+    _leafTrail.setAlpha(1, 1, 0, 0);
+    _leafTrail.setMotion(170, 100, 0.2, 20, 200, 0.3);
+    add(_leafTrail);
+    _leafTrail.start(false, 1, 0.01);
 
     _grpTrees = new FlxTypedGroup<Tree>();
     add(_grpTrees);
@@ -69,6 +79,8 @@ class PlayState extends FlxState
    */
   override public function update():Void
   {
+    _leafTrail.x = _player.x + 3;
+    _leafTrail.y = _player.y + 55;
     super.update();
   }
 }
