@@ -21,6 +21,7 @@ class PlayState extends FlxState
   private var _grpAnimals:FlxTypedGroup<Animal>;
   private var _grpEnemies:FlxTypedGroup<Enemy>;
   private var _leafTrail:FlxEmitterExt;
+  private var _treeExplode:FlxEmitterExt;
 
   /**
    * Function that is called up when to state is created to set it up.
@@ -44,12 +45,17 @@ class PlayState extends FlxState
     add(_leafTrail);
     _leafTrail.start(false, 1, 0.01);
 
+    _treeExplode = new FlxEmitterExt(200, 153);
+    _treeExplode.makeParticles("assets/images/tree_bits.png", 10, 0, true, 0);
+    add(_treeExplode);
+
     _grpTrees = new FlxTypedGroup<Tree>();
     add(_grpTrees);
     for (n in 0...10) {
-      _grpTrees.add(new Tree());
+      _grpTrees.add(new Tree(_treeExplode));
     }
 
+    /*
     _grpAnimals = new FlxTypedGroup<Animal>();
     add(_grpAnimals);
     for (n in 0...10) {
@@ -61,6 +67,7 @@ class PlayState extends FlxState
     for (n in 0...5) {
       _grpEnemies.add(new Enemy());
     }
+    */
 
     super.create();
   }
@@ -75,12 +82,26 @@ class PlayState extends FlxState
   }
 
   /**
+   * Player hits a tree.
+   */
+  private function playerTouchCoin(P:Player, T:Tree):Void
+  {
+    if (P.alive && P.exists && T.alive && T.exists)
+    {
+      T.fall();
+    }
+  }
+
+  /**
    * Function that is called once every frame.
    */
   override public function update():Void
   {
     _leafTrail.x = _player.x + 3;
     _leafTrail.y = _player.y + 55;
+
+    FlxG.overlap(_player, _grpTrees, playerTouchCoin);
+
     super.update();
   }
 }
