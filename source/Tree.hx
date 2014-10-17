@@ -8,6 +8,7 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxAngle;
 import flixel.util.FlxColor;
 import flixel.util.FlxDestroyUtil;
+import flixel.util.FlxRandom;
 
 using flixel.util.FlxSpriteUtil;
 
@@ -17,14 +18,19 @@ class Tree extends FlxSprite
   {
     super(X, Y);
 
-    screenCenter();
     loadGraphic("assets/images/tree.png", true, 34, 57);
-    x = FlxG.width;
+    y = FlxRandom.intRanged(0, FlxG.height);
+    x = FlxRandom.intRanged(100, FlxG.width);
   }
 
   private function movement():Void
   {
     x -= 5;
+
+    if (x <= 0)
+    {
+      x = FlxG.width;
+    }
   }
 
   override public function update():Void
