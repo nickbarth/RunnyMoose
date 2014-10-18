@@ -51,6 +51,7 @@ class Enemy extends FlxSprite
 
   private function grow(tween:FlxTween):Void
   {
+    alive = true;
     _exploded = false;
     y = FlxRandom.intRanged(0, FlxG.height);
     x = FlxG.width;
@@ -61,6 +62,7 @@ class Enemy extends FlxSprite
   public function fall():Void
   {
     if (!_exploded) {
+      alive = false;
       _exploded = true;
       _exploder.y = y;
       _exploder.x = x;

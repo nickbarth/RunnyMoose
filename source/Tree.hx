@@ -49,6 +49,7 @@ class Tree extends FlxSprite
 
   private function grow(tween:FlxTween):Void
   {
+    alive = true;
     _exploded = false;
     y = FlxRandom.intRanged(0, FlxG.height);
     x = FlxG.width;
@@ -59,6 +60,7 @@ class Tree extends FlxSprite
   public function fall():Void
   {
     if (!_exploded) {
+      alive = false;
       _exploded = true;
       _exploder.y = y + 57;
       _exploder.x = x - 30;
