@@ -77,7 +77,7 @@ class PlayState extends FlxState
     }
 
     _score = 0;
-    _scoreText = new FlxText(0, 0, 460, "Score: " + Std.string(_score));
+    _scoreText = new FlxText(0, 0, 460, "Score: 0")
     _scoreText.size = 10;
     _scoreText.y = 10;
     _scoreText.x = 10;
