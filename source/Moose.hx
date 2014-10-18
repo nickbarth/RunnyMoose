@@ -19,7 +19,7 @@ import flixel.util.FlxTimer;
 
 using flixel.util.FlxSpriteUtil;
 
-class Player extends FlxSprite
+class Moose extends FlxSprite
 {
 
   public function new(X:Float=0, Y:Float=0)

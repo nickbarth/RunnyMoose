@@ -16,7 +16,7 @@ import flixel.util.FlxMath;
 class PlayState extends FlxState
 {
   private var _background:FlxBackdrop;
-  private var _player:Player;
+  private var _moose:Moose;
   private var _grpTrees:FlxTypedGroup<Tree>;
   private var _grpAnimals:FlxTypedGroup<Animal>;
   private var _grpEnemies:FlxTypedGroup<Enemy>;
@@ -34,8 +34,8 @@ class PlayState extends FlxState
     _background.velocity.set(-300, 0);
     add(_background);
 
-    _player = new Player();
-    add(_player);
+    _moose = new Moose();
+    add(_moose);
 
     _grpEmitters = new FlxTypedGroup<FlxEmitterExt>();
     add(_grpEmitters);
@@ -86,9 +86,9 @@ class PlayState extends FlxState
   }
 
   /**
-   * Player hits a tree.
+   * Moose hits a tree.
    */
-  private function playerHitTree(P:Player, T:Tree):Void
+  private function mooseHitTree(P:Moose, T:Tree):Void
   {
     if (P.alive && P.exists && T.alive && T.exists)
     {
@@ -97,9 +97,9 @@ class PlayState extends FlxState
   }
 
   /**
-   * Player hits an animal.
+   * Moose hits an animal.
    */
-  private function playerHitAnimal(P:Player, A:Animal):Void
+  private function mooseHitAnimal(P:Moose, A:Animal):Void
   {
     if (P.alive && P.exists && A.alive && A.exists)
     {
@@ -108,9 +108,9 @@ class PlayState extends FlxState
   }
 
   /**
-   * Player hits an enemy.
+   * Moose hits an enemy.
    */
-  private function playerHitEnemy(P:Player, E:Enemy):Void
+  private function mooseHitEnemy(P:Moose, E:Enemy):Void
   {
     if (P.alive && P.exists && E.alive && E.exists)
     {
@@ -123,12 +123,12 @@ class PlayState extends FlxState
    */
   override public function update():Void
   {
-    _leafTrail.x = _player.x + 3;
-    _leafTrail.y = _player.y + 55;
+    _leafTrail.x = _moose.x + 3;
+    _leafTrail.y = _moose.y + 55;
 
-    FlxG.overlap(_player, _grpTrees, playerHitTree);
-    FlxG.overlap(_player, _grpAnimals, playerHitAnimal);
-    FlxG.overlap(_player, _grpEnemies, playerHitEnemy);
+    FlxG.overlap(_moose, _grpTrees, mooseHitTree);
+    FlxG.overlap(_moose, _grpAnimals, mooseHitAnimal);
+    FlxG.overlap(_moose, _grpEnemies, mooseHitEnemy);
 
     super.update();
   }
