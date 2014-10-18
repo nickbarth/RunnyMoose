@@ -51,15 +51,15 @@ class MenuState extends FlxState
     _title = new FlxSprite();
     _title.loadGraphic("assets/images/title.png", true, 820, 101);
     _title.x = FlxG.width / 2 - _title.width / 2;
-    var tween3 = FlxTween.tween(_title.scale, { x: 1.1 }, 0.2, { type:FlxTween.PINGPONG });
-    var tween3 = FlxTween.tween(_title.scale, { y: 0.7 }, 0.4, { type:FlxTween.PINGPONG });
+    FlxTween.tween(_title.scale, { x: 1.1 }, 0.2, { type:FlxTween.PINGPONG });
+    FlxTween.tween(_title.scale, { y: 0.7 }, 0.4, { type:FlxTween.PINGPONG });
     add(_title);
 
     _moose = new FlxSprite(200, 100);
     _moose.loadGraphic("assets/images/moose_run.png", true, 60, 64);
     _moose.animation.add("run", [0, 1], 20, true);
     _moose.x = FlxG.width / 2 - _moose.width / 2;
-    var tween1 = FlxTween.tween(_moose, { y: 200 }, 0.5, { type:FlxTween.PINGPONG });
+    FlxTween.tween(_moose, { y: 200 }, 0.5, { type:FlxTween.PINGPONG });
     add(_moose);
     _moose.animation.play("run");
 
@@ -69,7 +69,7 @@ class MenuState extends FlxState
     _leafTrail.setAlpha(1, 1, 0, 0);
     _leafTrail.setMotion(170, 100, 0.2, 20, 200, 0.3);
     _leafTrail.x = _moose.x + 3;
-    var tween2 = FlxTween.tween(_leafTrail, { y: 252 }, 0.5, { type:FlxTween.PINGPONG });
+    FlxTween.tween(_leafTrail, { y: 252 }, 0.5, { type:FlxTween.PINGPONG });
     add(_leafTrail);
     _leafTrail.start(false, 1, 0.01);
 
@@ -83,7 +83,7 @@ class MenuState extends FlxState
     _link.size = 40;
     _link.y = FlxG.height - 100;
     _link.x = FlxG.width / 2 - 220;
-    var tween4 = FlxTween.angle(_link, -5, 5, 0.2, { type:FlxTween.PINGPONG });
+    FlxTween.angle(_link, -5, 5, 0.2, { type:FlxTween.PINGPONG });
     add(_link);
 
     super.create();
