@@ -68,7 +68,9 @@ class PlayState extends FlxState
     _grpEnemies = new FlxTypedGroup<Enemy>();
     add(_grpEnemies);
     for (n in 0...5) {
-      _grpEnemies.add(new Enemy());
+      var enemyExploder:FlxEmitterExt = new FlxEmitterExt();
+      _grpEmitters.add(enemyExploder);
+      _grpEnemies.add(new Enemy(enemyExploder));
     }
 
     super.create();
@@ -106,6 +108,17 @@ class PlayState extends FlxState
   }
 
   /**
+   * Player hits an enemy.
+   */
+  private function playerHitEnemy(P:Player, E:Enemy):Void
+  {
+    if (P.alive && P.exists && E.alive && E.exists)
+    {
+      E.fall();
+    }
+  }
+
+  /**
    * Function that is called once every frame.
    */
   override public function update():Void
@@ -115,6 +128,7 @@ class PlayState extends FlxState
 
     FlxG.overlap(_player, _grpTrees, playerHitTree);
     FlxG.overlap(_player, _grpAnimals, playerHitAnimal);
+    FlxG.overlap(_player, _grpEnemies, playerHitEnemy);
 
     super.update();
   }
