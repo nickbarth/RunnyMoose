@@ -31,7 +31,7 @@ class PlayState extends FlxState
     var n:Int;
 
     _background = new FlxBackdrop("assets/images/grass.png");
-    _background.velocity.set(-100, 0);
+    _background.velocity.set(-300, 0);
     add(_background);
 
     _player = new Player();
@@ -51,7 +51,7 @@ class PlayState extends FlxState
     _grpTrees = new FlxTypedGroup<Tree>();
     add(_grpTrees);
 
-    for (n in 0...20) {
+    for (n in 0...40) {
       var treeExploder:FlxEmitterExt = new FlxEmitterExt();
       _grpEmitters.add(treeExploder);
       _grpTrees.add(new Tree(treeExploder));
@@ -59,7 +59,7 @@ class PlayState extends FlxState
 
     _grpAnimals = new FlxTypedGroup<Animal>();
     add(_grpAnimals);
-    for (n in 0...10) {
+    for (n in 0...20) {
       var animalExploder:FlxEmitterExt = new FlxEmitterExt();
       _grpEmitters.add(animalExploder);
       _grpAnimals.add(new Animal(animalExploder));

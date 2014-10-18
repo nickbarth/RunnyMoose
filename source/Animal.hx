@@ -37,6 +37,7 @@ class Animal extends FlxSprite
     animation.frameIndex = FlxRandom.intRanged(0, 8);
     scale.x = 2.0;
     scale.y = 2.0;
+    FlxTween.angle(this, -5, 5, 0.2, { type:FlxTween.PINGPONG });
   }
 
   private function movement():Void
