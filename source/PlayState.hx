@@ -9,6 +9,7 @@ import flixel.group.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
+import flixel.util.FlxStringUtil;
 
 /**
  * A FlxState which can be used for the actual gameplay.
@@ -22,6 +23,8 @@ class PlayState extends FlxState
   private var _grpEnemies:FlxTypedGroup<Enemy>;
   private var _grpEmitters:FlxTypedGroup<FlxEmitterExt>;
   private var _leafTrail:FlxEmitterExt;
+  private var _scoreText:FlxText;
+  private var _score:Int;
 
   /**
    * Function that is called up when to state is created to set it up.
@@ -73,6 +76,13 @@ class PlayState extends FlxState
       _grpEnemies.add(new Enemy(enemyExploder));
     }
 
+    _score = 0;
+    _scoreText = new FlxText(0, 0, 460, "Score: " + Std.string(_score));
+    _scoreText.size = 10;
+    _scoreText.y = 10;
+    _scoreText.x = 10;
+    add(_scoreText);
+
     super.create();
   }
 
@@ -92,6 +102,7 @@ class PlayState extends FlxState
   {
     if (P.alive && P.exists && T.alive && T.exists)
     {
+      _score += 5;
       T.fall();
     }
   }
@@ -103,6 +114,7 @@ class PlayState extends FlxState
   {
     if (P.alive && P.exists && A.alive && A.exists)
     {
+      _score += 10;
       A.fall();
     }
   }
@@ -114,6 +126,7 @@ class PlayState extends FlxState
   {
     if (P.alive && P.exists && E.alive && E.exists)
     {
+      _score += 20;
       E.fall();
     }
   }
@@ -125,6 +138,7 @@ class PlayState extends FlxState
   {
     _leafTrail.x = _moose.x + 3;
     _leafTrail.y = _moose.y + 55;
+    _scoreText.text = "Score: " + FlxStringUtil.formatMoney(_score).split(".")[0];
 
     FlxG.overlap(_moose, _grpTrees, mooseHitTree);
     FlxG.overlap(_moose, _grpAnimals, mooseHitAnimal);
