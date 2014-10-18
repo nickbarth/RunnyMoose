@@ -60,7 +60,9 @@ class PlayState extends FlxState
     _grpAnimals = new FlxTypedGroup<Animal>();
     add(_grpAnimals);
     for (n in 0...10) {
-      _grpAnimals.add(new Animal());
+      var animalExploder:FlxEmitterExt = new FlxEmitterExt();
+      _grpEmitters.add(animalExploder);
+      _grpAnimals.add(new Animal(animalExploder));
     }
 
     _grpEnemies = new FlxTypedGroup<Enemy>();
@@ -84,11 +86,22 @@ class PlayState extends FlxState
   /**
    * Player hits a tree.
    */
-  private function playerTouchCoin(P:Player, T:Tree):Void
+  private function playerHitTree(P:Player, T:Tree):Void
   {
     if (P.alive && P.exists && T.alive && T.exists)
     {
       T.fall();
+    }
+  }
+
+  /**
+   * Player hits an animal.
+   */
+  private function playerHitAnimal(P:Player, A:Animal):Void
+  {
+    if (P.alive && P.exists && A.alive && A.exists)
+    {
+      A.fall();
     }
   }
 
@@ -100,7 +113,8 @@ class PlayState extends FlxState
     _leafTrail.x = _player.x + 3;
     _leafTrail.y = _player.y + 55;
 
-    FlxG.overlap(_player, _grpTrees, playerTouchCoin);
+    FlxG.overlap(_player, _grpTrees, playerHitTree);
+    FlxG.overlap(_player, _grpAnimals, playerHitAnimal);
 
     super.update();
   }
