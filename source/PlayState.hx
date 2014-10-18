@@ -20,8 +20,8 @@ class PlayState extends FlxState
   private var _grpTrees:FlxTypedGroup<Tree>;
   private var _grpAnimals:FlxTypedGroup<Animal>;
   private var _grpEnemies:FlxTypedGroup<Enemy>;
+  private var _grpEmitters:FlxTypedGroup<FlxEmitterExt>;
   private var _leafTrail:FlxEmitterExt;
-  private var _treeExplode:FlxEmitterExt;
 
   /**
    * Function that is called up when to state is created to set it up.
@@ -37,6 +37,9 @@ class PlayState extends FlxState
     _player = new Player();
     add(_player);
 
+    _grpEmitters = new FlxTypedGroup<FlxEmitterExt>();
+    add(_grpEmitters);
+
     _leafTrail = new FlxEmitterExt(200, 153);
     _leafTrail.setRotation(0, 0);
     _leafTrail.makeParticles("assets/images/leaf.png", 1200, 0, true, 0);
@@ -45,17 +48,15 @@ class PlayState extends FlxState
     add(_leafTrail);
     _leafTrail.start(false, 1, 0.01);
 
-    _treeExplode = new FlxEmitterExt(200, 153);
-    _treeExplode.makeParticles("assets/images/tree_bits.png", 10, 0, true, 0);
-    add(_treeExplode);
-
     _grpTrees = new FlxTypedGroup<Tree>();
     add(_grpTrees);
-    for (n in 0...10) {
-      _grpTrees.add(new Tree(_treeExplode));
+
+    for (n in 0...20) {
+      var treeExploder:FlxEmitterExt = new FlxEmitterExt();
+      _grpEmitters.add(treeExploder);
+      _grpTrees.add(new Tree(treeExploder));
     }
 
-    /*
     _grpAnimals = new FlxTypedGroup<Animal>();
     add(_grpAnimals);
     for (n in 0...10) {
@@ -67,7 +68,6 @@ class PlayState extends FlxState
     for (n in 0...5) {
       _grpEnemies.add(new Enemy());
     }
-    */
 
     super.create();
   }

@@ -20,13 +20,15 @@ using flixel.util.FlxSpriteUtil;
 
 class Tree extends FlxSprite
 {
-  private var _Exploded:Bool;
-  private var _explode:FlxEmitterExt;
+  private var _exploded:Bool;
+  private var _exploder:FlxEmitterExt;
 
-  public function new(explode)
+  public function new(exploder:FlxEmitterExt)
   {
-    _Exploded = false;
-    _explode = explode;
+    _exploded = false;
+    _exploder = exploder;
+    _exploder.makeParticles("assets/images/tree_bits.png", 10, 0, true, 0);
+    _exploder.setMotion(170, 100, 0.2, 20, 200, 0.3);
 
     super();
 
@@ -47,7 +49,7 @@ class Tree extends FlxSprite
 
   private function grow(tween:FlxTween):Void
   {
-    _Exploded = false;
+    _exploded = false;
     y = FlxRandom.intRanged(0, FlxG.height);
     x = FlxG.width;
     angle = 0;
@@ -56,14 +58,15 @@ class Tree extends FlxSprite
 
   public function fall():Void
   {
-    if (!_Exploded) {
-      _Exploded = true;
-      _explode.y = y + 57;
-      _explode.x = x - 30;
-      _explode.start(true, 1, 0.01);
+    if (!_exploded) {
+      _exploded = true;
+      _exploder.y = y + 57;
+      _exploder.x = x - 30;
+      _exploder.start(true, 1, 0.01);
 
-      FlxTween.angle(this, 0, 120, 0.2, { type:FlxTween.ONESHOT });
-      FlxTween.tween(this, { alpha: 0 }, 0.33, { type:FlxTween.ONESHOT, ease:FlxEase.circOut, complete:grow });
+      FlxG.camera.shake(0.01, 0.1);
+      FlxTween.angle(this, 0, 180, 0.8, { type:FlxTween.ONESHOT });
+      FlxTween.tween(this, { alpha: 0 }, 2.0, { type:FlxTween.ONESHOT, ease:FlxEase.circOut, complete:grow });
     }
   }
 

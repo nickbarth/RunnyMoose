@@ -23,7 +23,7 @@ class Player extends FlxSprite
     loadGraphic("assets/images/moose_run.png", true, 60, 64);
     animation.add("run", [0, 1], 20, true);
     animation.play("run");
-    x = 20;
+    x = 50;
   }
 
   private function movement():Void
