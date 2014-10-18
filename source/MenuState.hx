@@ -42,8 +42,6 @@ class MenuState extends FlxState
    */
   override public function create():Void
   {
-    FlxG.mouse.setNativeCursor();
-
     _background = new FlxBackdrop("assets/images/grass.png");
     _background.velocity.set(-100, 0);
     add(_background);

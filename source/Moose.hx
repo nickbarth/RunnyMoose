@@ -5,7 +5,6 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.effects.particles.FlxEmitterExt;
 import flixel.system.FlxSound;
-import flixel.text.FlxText;
 import flixel.tweens.FlxEase.EaseFunction;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween.TweenOptions;
@@ -21,10 +20,16 @@ using flixel.util.FlxSpriteUtil;
 
 class Moose extends FlxSprite
 {
+  private var _exploded:Bool;
+  private var _exploder:FlxEmitterExt;
 
-  public function new(X:Float=0, Y:Float=0)
+  public function new(exploder)
   {
-    super(X, Y);
+    _exploded = false;
+    _exploder = exploder;
+    _exploder.makeParticles("assets/images/tree_bits.png", 50, 0, true, 0);
+
+    super();
 
     screenCenter();
     loadGraphic("assets/images/moose_run.png", true, 60, 64);
@@ -50,8 +55,16 @@ class Moose extends FlxSprite
     }
   }
 
-  private function rage():Void
+  public function fall():Void
   {
+    if (!_exploded) {
+      alive = false;
+      _exploded = true;
+      _exploder.y = y;
+      _exploder.x = x;
+      _exploder.start(true, 1, 0.01);
+      FlxTween.tween(this, { alpha: 0 }, 0.1, { type:FlxTween.ONESHOT, ease:FlxEase.circOut });
+    }
   }
 
   override public function update():Void

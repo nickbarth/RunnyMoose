@@ -7,6 +7,10 @@ import flixel.addons.display.FlxBackdrop;
 import flixel.effects.particles.FlxEmitterExt;
 import flixel.group.FlxTypedGroup;
 import flixel.text.FlxText;
+import flixel.tweens.FlxEase.EaseFunction;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween.TweenOptions;
+import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import flixel.util.FlxStringUtil;
@@ -37,11 +41,13 @@ class PlayState extends FlxState
     _background.velocity.set(-300, 0);
     add(_background);
 
-    _moose = new Moose();
-    add(_moose);
-
     _grpEmitters = new FlxTypedGroup<FlxEmitterExt>();
     add(_grpEmitters);
+
+    var mooseExploder:FlxEmitterExt = new FlxEmitterExt();
+    _grpEmitters.add(mooseExploder);
+    _moose = new Moose(mooseExploder);
+    add(_moose);
 
     _leafTrail = new FlxEmitterExt(200, 153);
     _leafTrail.setRotation(0, 0);
@@ -77,7 +83,7 @@ class PlayState extends FlxState
     }
 
     _score = 0;
-    _scoreText = new FlxText(0, 0, 460, "Score: 0")
+    _scoreText = new FlxText(0, 0, 460, "Score: 0");
     _scoreText.size = 10;
     _scoreText.y = 10;
     _scoreText.x = 10;
@@ -98,9 +104,9 @@ class PlayState extends FlxState
   /**
    * Moose hits a tree.
    */
-  private function mooseHitTree(P:Moose, T:Tree):Void
+  private function mooseHitTree(M:Moose, T:Tree):Void
   {
-    if (P.alive && P.exists && T.alive && T.exists)
+    if (M.alive && M.exists && T.alive && T.exists)
     {
       _score += 5;
       T.fall();
@@ -110,9 +116,9 @@ class PlayState extends FlxState
   /**
    * Moose hits an animal.
    */
-  private function mooseHitAnimal(P:Moose, A:Animal):Void
+  private function mooseHitAnimal(M:Moose, A:Animal):Void
   {
-    if (P.alive && P.exists && A.alive && A.exists)
+    if (M.alive && M.exists && A.alive && A.exists)
     {
       _score += 10;
       A.fall();
@@ -122,13 +128,20 @@ class PlayState extends FlxState
   /**
    * Moose hits an enemy.
    */
-  private function mooseHitEnemy(P:Moose, E:Enemy):Void
+  private function mooseHitEnemy(M:Moose, E:Enemy):Void
   {
-    if (P.alive && P.exists && E.alive && E.exists)
+    if (M.alive && M.exists && E.alive && E.exists)
     {
       _score += 20;
+      M.fall();
       E.fall();
+      FlxTween.tween(_leafTrail, { alpha: 0 }, 0.2, { type:FlxTween.ONESHOT, ease:FlxEase.circOut, complete:gameover });
     }
+  }
+
+  private function gameover(tween:FlxTween):Void
+  {
+    FlxG.switchState(new MenuState());
   }
 
   /**
