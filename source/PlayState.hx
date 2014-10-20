@@ -13,6 +13,7 @@ import flixel.tweens.FlxTween.TweenOptions;
 import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
+import flixel.util.FlxSave;
 import flixel.util.FlxStringUtil;
 
 using flixel.util.FlxSpriteUtil;
@@ -32,7 +33,10 @@ class PlayState extends FlxState
   private var _grpEmitters:FlxTypedGroup<FlxEmitterExt>;
   private var _leafTrail:FlxEmitterExt;
   private var _scoreText:FlxText;
+  private var _gameSave:FlxSave;
   private var _score:Int;
+  private var _topScoreText:FlxText;
+  private var _topScore:Int;
 
   /**
    * Function that is called up when to state is created to set it up.
@@ -40,6 +44,9 @@ class PlayState extends FlxState
   override public function create():Void
   {
     var n:Int;
+
+    _gameSave = new FlxSave();
+    _gameSave.bind("GameSave");
 
     _background = new FlxBackdrop("assets/images/grass.png");
     _background.velocity.set(-300, 0);
@@ -92,6 +99,14 @@ class PlayState extends FlxState
     _scoreText.y = 10;
     _scoreText.x = 10;
     add(_scoreText);
+
+    _topScore = _gameSave.data.topScore;
+    _topScoreText = new FlxText(0, 0, FlxG.width - 10, "Top: " + FlxStringUtil.formatMoney(_topScore).split(".")[0]);
+    _topScoreText.size = 10;
+    _topScoreText.x = 0;
+    _topScoreText.y = 10;
+    _topScoreText.alignment = "right";
+    add(_topScoreText);
 
     super.create();
   }
@@ -146,6 +161,16 @@ class PlayState extends FlxState
 
   private function clickPlay():Void
   {
+    var best = _score;
+
+    if (_topScore > best)
+    {
+      best = _topScore;
+    }
+
+    _gameSave.data.topScore = best;
+    _gameSave.flush();
+
     FlxG.switchState(new PlayState());
   }
 
@@ -181,6 +206,10 @@ class PlayState extends FlxState
     _leafTrail.x = _moose.x + 3;
     _leafTrail.y = _moose.y + 55;
     _scoreText.text = "Score: " + FlxStringUtil.formatMoney(_score).split(".")[0];
+
+    if (_score > _topScore) {
+      _topScoreText.text = "Top: " + FlxStringUtil.formatMoney(_score).split(".")[0];
+    }
 
     FlxG.overlap(_moose, _grpTrees, mooseHitTree);
     FlxG.overlap(_moose, _grpAnimals, mooseHitAnimal);
