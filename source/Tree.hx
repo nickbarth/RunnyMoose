@@ -43,7 +43,8 @@ class Tree extends FlxSprite
 
     if (x <= -20)
     {
-      x = FlxG.width;
+      x = FlxG.width + 20;
+      y = FlxRandom.intRanged(0, FlxG.height);
     }
   }
 

@@ -44,9 +44,10 @@ class Animal extends FlxSprite
   {
     x -= 5;
 
-    if (x <= 0)
+    if (x <= -20)
     {
-      x = FlxG.width;
+      x = FlxG.width + 20;
+      y = FlxRandom.intRanged(0, FlxG.height);
     }
   }
 
