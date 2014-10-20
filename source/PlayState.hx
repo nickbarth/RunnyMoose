@@ -15,11 +15,15 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import flixel.util.FlxStringUtil;
 
+using flixel.util.FlxSpriteUtil;
+
 /**
  * A FlxState which can be used for the actual gameplay.
  */
 class PlayState extends FlxState
 {
+  private var _btnPlay:FlxButton;
+  private var _gameOver:FlxSprite;
   private var _background:FlxBackdrop;
   private var _moose:Moose;
   private var _grpTrees:FlxTypedGroup<Tree>;
@@ -135,13 +139,38 @@ class PlayState extends FlxState
       _score += 20;
       M.fall();
       E.fall();
-      FlxTween.tween(_leafTrail, { alpha: 0 }, 0.2, { type:FlxTween.ONESHOT, ease:FlxEase.circOut, complete:gameover });
+      _leafTrail.kill();
+      haxe.Timer.delay(gameover, 500);
     }
   }
 
-  private function gameover(tween:FlxTween):Void
+  private function clickPlay():Void
   {
-    FlxG.switchState(new MenuState());
+    FlxG.switchState(new PlayState());
+  }
+
+  private function gameover():Void
+  {
+    _gameOver = new FlxSprite();
+    _gameOver.loadGraphic("assets/images/game_over.png", true, 449, 50);
+    _gameOver.screenCenter();
+    _gameOver.y = 100;
+    FlxTween.tween(_gameOver.scale, { x: 1.1 }, 0.2, { type:FlxTween.PINGPONG });
+    FlxTween.tween(_gameOver.scale, { y: 0.7 }, 0.4, { type:FlxTween.PINGPONG });
+    add(_gameOver);
+
+    _btnPlay = new FlxButton(0, 0, "", clickPlay);
+    _btnPlay.loadGraphic("assets/images/start_button.png", false, 98, 49);
+    _btnPlay.screenCenter();
+    _btnPlay.y = 300;
+    add(_btnPlay);
+
+    var _link = new FlxText(0, 0, 460, "RUNNYMOOSE.COM");
+    _link.size = 40;
+    _link.y = FlxG.height - 100;
+    _link.x = FlxG.width / 2 - 220;
+    FlxTween.angle(_link, -5, 5, 0.2, { type:FlxTween.PINGPONG });
+    add(_link);
   }
 
   /**
