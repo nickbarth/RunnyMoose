@@ -15,6 +15,7 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxMath;
 import flixel.util.FlxSave;
 import flixel.util.FlxStringUtil;
+import flixel.system.FlxSound;
 
 using flixel.util.FlxSpriteUtil;
 
@@ -38,6 +39,8 @@ class PlayState extends FlxState
   private var _topScoreText:FlxText;
   private var _topScore:Int;
   private var _enemyTimer:haxe.Timer;
+  private var _sndHit:FlxSound;
+  private var _sndExplode:FlxSound;
 
   /**
    * Function that is called up when to state is created to set it up.
@@ -48,6 +51,9 @@ class PlayState extends FlxState
 
     _gameSave = new FlxSave();
     _gameSave.bind("GameSave");
+
+    _sndHit = FlxG.sound.load("assets/sounds/hit_sound.wav");
+    _sndExplode = FlxG.sound.load("assets/sounds/boom_sound.wav");
 
     _background = new FlxBackdrop("assets/images/grass.png");
     _background.velocity.set(-300, 0);
@@ -133,6 +139,7 @@ class PlayState extends FlxState
   {
     if (M.alive && M.exists && T.alive && T.exists)
     {
+      _sndHit.play();
       _score += 5;
       T.fall();
     }
@@ -145,6 +152,7 @@ class PlayState extends FlxState
   {
     if (M.alive && M.exists && A.alive && A.exists)
     {
+      _sndHit.play();
       _score += 10;
       A.fall();
     }
@@ -157,6 +165,7 @@ class PlayState extends FlxState
   {
     if (M.alive && M.exists && E.alive && E.exists)
     {
+      _sndExplode.play();
       _score += 20;
       M.fall();
       E.fall();

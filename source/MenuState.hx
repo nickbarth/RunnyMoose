@@ -42,6 +42,8 @@ class MenuState extends FlxState
    */
   override public function create():Void
   {
+    FlxG.sound.playMusic("assets/music/music.mp3", 1, true);
+
     _background = new FlxBackdrop("assets/images/grass.png");
     _background.velocity.set(-100, 0);
     add(_background);
