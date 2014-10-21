@@ -26,6 +26,8 @@ class PlayState extends FlxState
 {
   private var _btnPlay:FlxButton;
   private var _gameOver:FlxSprite;
+  private var _upArrow:FlxSprite;
+  private var _downArrow:FlxSprite;
   private var _background:FlxBackdrop;
   private var _moose:Moose;
   private var _grpTrees:FlxTypedGroup<Tree>;
@@ -77,6 +79,24 @@ class PlayState extends FlxState
 
     _grpTrees = new FlxTypedGroup<Tree>();
     add(_grpTrees);
+
+    _upArrow = new FlxSprite();
+    _upArrow.loadGraphic("assets/images/up_button.png", true, 100, 100);
+    _upArrow.screenCenter();
+    _upArrow.y = 10;
+    _upArrow.scale.x = 5;
+    _upArrow.scale.y = 2;
+    FlxTween.tween(_upArrow, { alpha: 0.0 }, 1.0);
+    add(_upArrow);
+
+    _downArrow = new FlxSprite();
+    _downArrow.loadGraphic("assets/images/down_button.png", true, 100, 100);
+    _downArrow.screenCenter();
+    _downArrow.y = FlxG.height - _downArrow.height - 10;
+    _downArrow.scale.x = 5;
+    _downArrow.scale.y = 2;
+    FlxTween.tween(_downArrow, { alpha: 0.0 }, 1.0);
+    add(_downArrow);
 
     for (n in 0...40) {
       var treeExploder:FlxEmitterExt = new FlxEmitterExt();
