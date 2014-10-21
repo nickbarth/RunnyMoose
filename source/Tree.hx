@@ -34,7 +34,7 @@ class Tree extends FlxSprite
 
     loadGraphic("assets/images/tree.png", true, 34, 57);
     y = FlxRandom.intRanged(0, FlxG.height);
-    x = FlxRandom.intRanged(100, FlxG.width);
+    x = FlxRandom.intRanged(0, FlxG.width);
   }
 
   private function movement():Void
