@@ -69,7 +69,7 @@ class Tree extends FlxSprite
 
       FlxG.camera.shake(0.01, 0.1);
       FlxTween.angle(this, 0, 180, 0.5, { type:FlxTween.ONESHOT });
-      FlxTween.tween(this, { alpha: 0 }, 2.0, { type:FlxTween.ONESHOT, ease:FlxEase.circOut, complete:grow });
+      FlxTween.tween(this, { alpha: 0 }, 1.0, { type:FlxTween.ONESHOT, ease:FlxEase.circOut, complete:grow });
     }
   }
 
