@@ -106,6 +106,7 @@ class PlayState extends FlxState
 
     _grpAnimals = new FlxTypedGroup<Animal>();
     add(_grpAnimals);
+
     for (n in 0...40) {
       var animalExploder:FlxEmitterExt = new FlxEmitterExt();
       _grpEmitters.add(animalExploder);
