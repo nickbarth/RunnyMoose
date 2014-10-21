@@ -33,7 +33,7 @@ class Enemy extends FlxSprite
 
     loadGraphic("assets/images/forest_man.png", true, 20, 28);
     y = FlxRandom.intRanged(0, FlxG.height);
-    x = FlxRandom.intRanged(100, FlxG.width);
+    x = FlxG.width + 20;
     scale.x = 2;
     scale.y = 2;
     FlxTween.tween(this.scale, { x:1.8, y:1.8 }, 0.3, { type:FlxTween.PINGPONG });

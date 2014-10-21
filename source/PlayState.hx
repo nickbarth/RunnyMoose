@@ -37,6 +37,7 @@ class PlayState extends FlxState
   private var _score:Int;
   private var _topScoreText:FlxText;
   private var _topScore:Int;
+  private var _enemyTimer:haxe.Timer;
 
   /**
    * Function that is called up when to state is created to set it up.
@@ -87,11 +88,9 @@ class PlayState extends FlxState
 
     _grpEnemies = new FlxTypedGroup<Enemy>();
     add(_grpEnemies);
-    for (n in 0...5) {
-      var enemyExploder:FlxEmitterExt = new FlxEmitterExt();
-      _grpEmitters.add(enemyExploder);
-      _grpEnemies.add(new Enemy(enemyExploder));
-    }
+
+    _enemyTimer = new haxe.Timer(2000);
+    _enemyTimer.run = spawnEnemy;
 
     _score = 0;
     _scoreText = new FlxText(0, 0, 460, "Score: 0");
@@ -109,6 +108,13 @@ class PlayState extends FlxState
     add(_topScoreText);
 
     super.create();
+  }
+
+  private function spawnEnemy()
+  {
+    var enemyExploder:FlxEmitterExt = new FlxEmitterExt();
+    _grpEmitters.add(enemyExploder);
+    _grpEnemies.add(new Enemy(enemyExploder));
   }
 
   /**
