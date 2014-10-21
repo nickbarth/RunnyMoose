@@ -115,8 +115,14 @@ class PlayState extends FlxState
     _grpEnemies = new FlxTypedGroup<Enemy>();
     add(_grpEnemies);
 
-    _enemyTimer = new haxe.Timer(2000);
+    _enemyTimer = new haxe.Timer(5000);
     _enemyTimer.run = spawnEnemy;
+
+    for (n in 0...4) {
+      var enemyExploder:FlxEmitterExt = new FlxEmitterExt();
+      _grpEmitters.add(enemyExploder);
+      _grpEnemies.add(new Enemy(enemyExploder, true));
+    }
 
     _score = 0;
     _scoreText = new FlxText(0, 0, 460, "Score: 0");

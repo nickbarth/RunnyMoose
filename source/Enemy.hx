@@ -23,7 +23,7 @@ class Enemy extends FlxSprite
   private var _exploded:Bool;
   private var _exploder:FlxEmitterExt;
 
-  public function new(exploder)
+  public function new(exploder, randomX=false)
   {
     _exploded = false;
     _exploder = exploder;
@@ -34,8 +34,15 @@ class Enemy extends FlxSprite
     loadGraphic("assets/images/forest_man.png", true, 20, 28);
     y = FlxRandom.intRanged(0, FlxG.height);
     x = FlxG.width + 20;
+
+    if (randomX)
+    {
+      x = FlxRandom.intRanged(200, FlxG.width);
+    }
+
     scale.x = 2;
     scale.y = 2;
+
     FlxTween.tween(this.scale, { x:1.8, y:1.8 }, 0.3, { type:FlxTween.PINGPONG });
   }
 
