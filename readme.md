@@ -1,6 +1,6 @@
 # Runny Moose
 
-![RunnyMoose.com](http://i.imgur.com/SrAlKuw.gif)
+![RunnyMoose.com](http://runnymoose.com/RunnyMoose.gif)
 
 [RunnyMoose.com](http://RunnyMoose.com/)
 
