@@ -23,19 +23,10 @@ using flixel.util.FlxSpriteUtil;
  */
 class MenuState extends FlxState
 {
-  private var _btnPlay:FlxButton;
   private var _background:FlxBackdrop;
   private var _title:FlxSprite;
   private var _moose:FlxSprite;
   private var _leafTrail:FlxEmitterExt;
-
-  /**
-   * Function called by the Play button to start the game.
-   */
-  private function clickPlay():Void
-  {
-    FlxG.switchState(new PlayState());
-  }
 
   /**
    * Function that is called up when to state is created to set it up.
@@ -75,16 +66,10 @@ class MenuState extends FlxState
     add(_leafTrail);
     _leafTrail.start(false, 1, 0.01);
 
-    _btnPlay = new FlxButton(0, 0, "", clickPlay);
-    _btnPlay.loadGraphic("images/start_button.png", false, 98, 49);
-    _btnPlay.screenCenter();
-    _btnPlay.y = 300;
-    add(_btnPlay);
-
-    var _link = new FlxText(0, 0, 460, "RUNNYMOOSE.COM");
+    var _link = new FlxText(0, 0, 500, "Press Space to Start");
     _link.size = 40;
     _link.y = FlxG.height - 100;
-    _link.x = FlxG.width / 2 - 220;
+    _link.x = FlxG.width / 2 - 250;
     FlxTween.angle(_link, -5, 5, 0.2, { type:FlxTween.PINGPONG });
     add(_link);
 
@@ -105,6 +90,10 @@ class MenuState extends FlxState
    */
   override public function update():Void
   {
+    if (FlxG.keys.pressed.SPACE) {
+      FlxG.switchState(new PlayState());
+    }
+
     super.update();
   }
 }

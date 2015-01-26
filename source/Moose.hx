@@ -22,6 +22,9 @@ class Moose extends FlxSprite
 {
   private var _exploded:Bool;
   private var _exploder:FlxEmitterExt;
+  private var _up:Bool;
+  private var _down:Bool;
+  private var _moveUp:Bool = false;
 
   public function new(exploder)
   {
@@ -42,7 +45,13 @@ class Moose extends FlxSprite
 
   private function movement():Void
   {
-    if (FlxG.mouse.y < (FlxG.height / 2)) {
+    _up = FlxG.keys.anyPressed(["UP", "W"]);
+    _down = FlxG.keys.anyPressed(["DOWN", "S"]);
+
+    if (_up) _moveUp = true;
+    if (_down) _moveUp = false;
+
+    if (_moveUp) {
       y -= 5;
     } else {
       y += 5;

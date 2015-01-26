@@ -24,7 +24,7 @@ using flixel.util.FlxSpriteUtil;
  */
 class PlayState extends FlxState
 {
-  private var _btnPlay:FlxButton;
+  private var _isGameOver:Bool;
   private var _gameOver:FlxSprite;
   private var _upArrow:FlxSprite;
   private var _downArrow:FlxSprite;
@@ -119,7 +119,7 @@ class PlayState extends FlxState
     _enemyTimer = new haxe.Timer(5000);
     _enemyTimer.run = spawnEnemy;
 
-    for (n in 0...4) {
+    for (n in 0...2) {
       var enemyExploder:FlxEmitterExt = new FlxEmitterExt();
       _grpEmitters.add(enemyExploder);
       _grpEnemies.add(new Enemy(enemyExploder, true));
@@ -226,16 +226,10 @@ class PlayState extends FlxState
     FlxTween.tween(_gameOver.scale, { y: 0.7 }, 0.4, { type:FlxTween.PINGPONG });
     add(_gameOver);
 
-    _btnPlay = new FlxButton(0, 0, "", clickPlay);
-    _btnPlay.loadGraphic("images/start_button.png", false, 98, 49);
-    _btnPlay.screenCenter();
-    _btnPlay.y = 300;
-    add(_btnPlay);
-
-    var _link = new FlxText(0, 0, 460, "RUNNYMOOSE.COM");
+    var _link = new FlxText(0, 0, 500, "Press Space to Play");
     _link.size = 40;
     _link.y = FlxG.height - 100;
-    _link.x = FlxG.width / 2 - 220;
+    _link.x = FlxG.width / 2 - 250;
     FlxTween.angle(_link, -5, 5, 0.2, { type:FlxTween.PINGPONG });
     add(_link);
   }
@@ -256,6 +250,10 @@ class PlayState extends FlxState
     FlxG.overlap(_moose, _grpTrees, mooseHitTree);
     FlxG.overlap(_moose, _grpAnimals, mooseHitAnimal);
     FlxG.overlap(_moose, _grpEnemies, mooseHitEnemy);
+
+    if (FlxG.keys.pressed.SPACE) {
+      FlxG.switchState(new PlayState());
+    }
 
     super.update();
   }
