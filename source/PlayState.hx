@@ -98,7 +98,7 @@ class PlayState extends FlxState
     FlxTween.tween(_downArrow, { alpha: 0.0 }, 1.0);
     add(_downArrow);
 
-    for (n in 0...40) {
+    for (n in 0...10) {
       var treeExploder:FlxEmitterExt = new FlxEmitterExt();
       _grpEmitters.add(treeExploder);
       _grpTrees.add(new Tree(treeExploder));
@@ -107,7 +107,7 @@ class PlayState extends FlxState
     _grpAnimals = new FlxTypedGroup<Animal>();
     add(_grpAnimals);
 
-    for (n in 0...40) {
+    for (n in 0...10) {
       var animalExploder:FlxEmitterExt = new FlxEmitterExt();
       _grpEmitters.add(animalExploder);
       _grpAnimals.add(new Animal(animalExploder));
