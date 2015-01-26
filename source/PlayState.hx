@@ -54,10 +54,10 @@ class PlayState extends FlxState
     _gameSave = new FlxSave();
     _gameSave.bind("GameSave");
 
-    _sndHit = FlxG.sound.load("assets/sounds/hit_sound.wav");
-    _sndExplode = FlxG.sound.load("assets/sounds/boom_sound.wav");
+    _sndHit = FlxG.sound.load("sounds/hit_sound.wav");
+    _sndExplode = FlxG.sound.load("sounds/boom_sound.wav");
 
-    _background = new FlxBackdrop("assets/images/grass.png");
+    _background = new FlxBackdrop("images/grass.png");
     _background.velocity.set(-300, 0);
     add(_background);
 
@@ -71,7 +71,7 @@ class PlayState extends FlxState
 
     _leafTrail = new FlxEmitterExt(200, 153);
     _leafTrail.setRotation(0, 0);
-    _leafTrail.makeParticles("assets/images/leaf.png", 1200, 0, true, 0);
+    _leafTrail.makeParticles("images/leaf.png", 1200, 0, true, 0);
     _leafTrail.setAlpha(1, 1, 0, 0);
     _leafTrail.setMotion(170, 100, 0.2, 20, 200, 0.3);
     add(_leafTrail);
@@ -81,7 +81,7 @@ class PlayState extends FlxState
     add(_grpTrees);
 
     _upArrow = new FlxSprite();
-    _upArrow.loadGraphic("assets/images/up_button.png", true, 100, 100);
+    _upArrow.loadGraphic("images/up_button.png", true, 100, 100);
     _upArrow.screenCenter();
     _upArrow.y = 10;
     _upArrow.scale.x = 5;
@@ -90,7 +90,7 @@ class PlayState extends FlxState
     add(_upArrow);
 
     _downArrow = new FlxSprite();
-    _downArrow.loadGraphic("assets/images/down_button.png", true, 100, 100);
+    _downArrow.loadGraphic("images/down_button.png", true, 100, 100);
     _downArrow.screenCenter();
     _downArrow.y = FlxG.height - _downArrow.height - 10;
     _downArrow.scale.x = 5;
@@ -219,7 +219,7 @@ class PlayState extends FlxState
   private function gameover():Void
   {
     _gameOver = new FlxSprite();
-    _gameOver.loadGraphic("assets/images/game_over.png", true, 449, 50);
+    _gameOver.loadGraphic("images/game_over.png", true, 449, 50);
     _gameOver.screenCenter();
     _gameOver.y = 100;
     FlxTween.tween(_gameOver.scale, { x: 1.1 }, 0.2, { type:FlxTween.PINGPONG });
@@ -227,7 +227,7 @@ class PlayState extends FlxState
     add(_gameOver);
 
     _btnPlay = new FlxButton(0, 0, "", clickPlay);
-    _btnPlay.loadGraphic("assets/images/start_button.png", false, 98, 49);
+    _btnPlay.loadGraphic("images/start_button.png", false, 98, 49);
     _btnPlay.screenCenter();
     _btnPlay.y = 300;
     add(_btnPlay);

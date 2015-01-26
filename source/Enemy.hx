@@ -27,11 +27,11 @@ class Enemy extends FlxSprite
   {
     _exploded = false;
     _exploder = exploder;
-    _exploder.makeParticles("assets/images/blood_bits.png", 10, 0, true, 0);
+    _exploder.makeParticles("images/blood_bits.png", 10, 0, true, 0);
 
     super();
 
-    loadGraphic("assets/images/forest_man.png", true, 20, 28);
+    loadGraphic("images/forest_man.png", true, 20, 28);
     y = FlxRandom.intRanged(0, FlxG.height);
     x = FlxG.width + 20;
 

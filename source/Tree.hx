@@ -27,12 +27,12 @@ class Tree extends FlxSprite
   {
     _exploded = false;
     _exploder = exploder;
-    _exploder.makeParticles("assets/images/tree_bits.png", 10, 0, true, 0);
+    _exploder.makeParticles("images/tree_bits.png", 10, 0, true, 0);
     _exploder.setMotion(170, 100, 0.2, 20, 200, 0.3);
 
     super();
 
-    loadGraphic("assets/images/tree.png", true, 34, 57);
+    loadGraphic("images/tree.png", true, 34, 57);
     y = FlxRandom.intRanged(0, FlxG.height);
     x = FlxRandom.intRanged(0, FlxG.width);
   }

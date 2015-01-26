@@ -78,5 +78,9 @@
 
   <!--------------------------------CUSTOM---------------------------------------->
 
+  <assets path="assets/images" rename="images" include="*.jpg|*.png" />
+  <assets path="assets/sounds" rename="sounds" include="*.wav|*.mp3" />
+  <assets path="assets/music" rename="music" include="*.wav|*.mp3" />
+
   <!--Place custom nodes like icons here (higher priority to override the HaxeFlixel icon)-->
 </project>

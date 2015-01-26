@@ -27,12 +27,12 @@ class Moose extends FlxSprite
   {
     _exploded = false;
     _exploder = exploder;
-    _exploder.makeParticles("assets/images/tree_bits.png", 50, 0, true, 0);
+    _exploder.makeParticles("images/tree_bits.png", 50, 0, true, 0);
 
     super();
 
     screenCenter();
-    loadGraphic("assets/images/moose_run.png", true, 60, 64);
+    loadGraphic("images/moose_run.png", true, 60, 64);
     animation.add("run", [0, 1], 20, true);
     animation.play("run");
     FlxTween.angle(this, -3, 3, 0.2, { type:FlxTween.PINGPONG });

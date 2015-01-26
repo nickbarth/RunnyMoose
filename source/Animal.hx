@@ -27,11 +27,11 @@ class Animal extends FlxSprite
   {
     _exploded = false;
     _exploder = exploder;
-    _exploder.makeParticles("assets/images/blood_bits.png", 10, 0, true, 0);
+    _exploder.makeParticles("images/blood_bits.png", 10, 0, true, 0);
 
     super();
 
-    loadGraphic("assets/images/forest_animals.png", true, 23, 9);
+    loadGraphic("images/forest_animals.png", true, 23, 9);
     y = FlxRandom.intRanged(0, FlxG.height);
     x = FlxRandom.intRanged(100, FlxG.width);
     animation.frameIndex = FlxRandom.intRanged(0, 8);
