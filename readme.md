@@ -4,4 +4,4 @@
 
 ### License
 
-WTFPL &copy; 2014 Nick Barth
+MIT &copy; 2014 Nick Barth
